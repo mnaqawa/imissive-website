@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Play, X, MonitorPlay } from 'lucide-react'
 import { FadeUp, motion } from '@/components/ui/motion'
@@ -13,6 +13,9 @@ interface VideoSectionProps {
 export function VideoSection({ locale }: VideoSectionProps) {
   const t = useTranslations('video')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const modalVideoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Handle keyboard escape to close modal
   const handleEscape = useCallback((e: KeyboardEvent) => {
@@ -25,12 +28,61 @@ export function VideoSection({ locale }: VideoSectionProps) {
     if (isModalOpen) {
       document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
+      // Pause the background video when modal opens
+      if (videoRef.current) {
+        videoRef.current.pause()
+      }
+    } else {
+      // Resume the background video when modal closes (if in viewport)
+      if (videoRef.current && containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0
+        if (isInViewport) {
+          videoRef.current.play().catch(() => {})
+        }
+      }
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = ''
     }
   }, [isModalOpen, handleEscape])
+
+  // Autoplay video when section enters viewport using IntersectionObserver
+  useEffect(() => {
+    const video = videoRef.current
+    const container = containerRef.current
+    
+    if (!video || !container) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isModalOpen) {
+            video.play().catch(() => {
+              // Autoplay may be blocked, which is fine
+            })
+          } else {
+            video.pause()
+          }
+        })
+      },
+      {
+        threshold: 0.3, // Start playing when 30% of video is visible
+        rootMargin: '0px'
+      }
+    )
+
+    observer.observe(container)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [isModalOpen])
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
 
   return (
     <>
@@ -58,143 +110,65 @@ export function VideoSection({ locale }: VideoSectionProps) {
           <FadeUp className="mx-auto max-w-3xl text-center mb-10">
             <div className="inline-flex items-center gap-2 mb-5 px-4 py-2 rounded-full bg-white/10 border border-white/10">
               <MonitorPlay className="h-4 w-4 text-secondary" />
-              <span className="text-sm font-medium text-secondary">Platform Demo</span>
+              <span className="text-sm font-medium text-secondary">Brand Film</span>
             </div>
             <h2 className="text-balance text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl lg:text-5xl">
-              {t?.('title') || 'See the Platform in Action'}
+              {t?.('title') || 'Powering Critical Communication'}
             </h2>
             <p className="mt-5 text-pretty text-lg text-primary-foreground/70">
-              {t?.('subtitle') || 'Watch how iMissive connects enterprise systems, messaging channels, routing, sender governance, and delivery visibility.'}
+              {t?.('subtitle') || 'A cinematic look at the reliability, security, and scale behind modern enterprise communication.'}
             </p>
           </FadeUp>
 
           {/* Video Preview Card */}
           <FadeUp delay={0.15}>
-            <div className="mx-auto max-w-4xl">
+            <div className="mx-auto max-w-4xl" ref={containerRef}>
               <motion.div
                 className="relative aspect-video rounded-2xl overflow-hidden cursor-pointer group"
-                onClick={() => setIsModalOpen(true)}
+                onClick={handleOpenModal}
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.3 }}
+                role="button"
+                tabIndex={0}
+                aria-label="Play iMissive platform video"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleOpenModal()
+                  }
+                }}
               >
-                {/* Glass card background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/10 backdrop-blur-md rounded-2xl" />
+                {/* Subtle border only - no overlay blocking video */}
+                <div className="absolute inset-0 border border-white/20 rounded-2xl z-10 pointer-events-none" />
                 
                 {/* Premium glow effect */}
                 <motion.div
-                  className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-secondary/20 via-accent/20 to-secondary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500"
+                  className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-secondary/20 via-accent/20 to-secondary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 z-0"
                 />
 
-                {/* Blurred enterprise dashboard preview - subtle and premium */}
-                <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                  {/* Soft blur overlay for "out of focus" effect */}
-                  <div className="absolute inset-0 backdrop-blur-[1px]" />
-                  
-                  {/* Subtle dashboard wireframe - increased contrast */}
-                  <div className="absolute inset-8 rounded-xl border border-white/10 p-4 opacity-80">
-                    {/* Top nav hint */}
-                    <div className="h-4 mb-4 flex items-center gap-3">
-                      <div className="h-2.5 w-2.5 rounded-full bg-secondary/30" />
-                      <div className="h-2 w-20 rounded bg-white/10" />
-                      <div className="h-2 w-14 rounded bg-white/8 ml-auto" />
-                    </div>
-                    
-                    {/* Content grid hint */}
-                    <div className="grid grid-cols-4 gap-3 h-[calc(100%-2rem)]">
-                      {/* Sidebar hint */}
-                      <motion.div 
-                        className="col-span-1 rounded-lg bg-white/[0.04] p-2"
-                        animate={{ opacity: [0.5, 0.7, 0.5] }}
-                        transition={{ duration: 4, repeat: Infinity }}
-                      >
-                        {[0, 1, 2, 3].map((i) => (
-                          <div key={i} className="h-2.5 rounded bg-white/8 mb-2" />
-                        ))}
-                      </motion.div>
-                      
-                      {/* Main content hint */}
-                      <div className="col-span-3 space-y-3">
-                        {/* Stats row hint */}
-                        <div className="grid grid-cols-3 gap-2">
-                          {[0, 1, 2].map((i) => (
-                            <motion.div 
-                              key={i}
-                              className="h-14 rounded-lg bg-white/[0.04] flex flex-col items-center justify-center"
-                              animate={{ opacity: [0.4, 0.6, 0.4] }}
-                              transition={{ duration: 3, repeat: Infinity, delay: i * 0.3 }}
-                            >
-                              <div className="h-2 w-8 rounded bg-secondary/20 mb-1" />
-                              <div className="h-1.5 w-12 rounded bg-white/8" />
-                            </motion.div>
-                          ))}
-                        </div>
-                        
-                        {/* Chart area hint */}
-                        <motion.div 
-                          className="flex-1 h-28 rounded-lg bg-white/[0.04] flex items-end justify-around p-4 gap-1.5"
-                          animate={{ opacity: [0.4, 0.6, 0.4] }}
-                          transition={{ duration: 4, repeat: Infinity }}
-                        >
-                          {[40, 65, 35, 75, 50, 45, 70].map((h, i) => (
-                            <motion.div 
-                              key={i}
-                              className="w-full rounded-t bg-gradient-to-t from-secondary/25 to-secondary/10"
-                              style={{ height: `${h}%` }}
-                              animate={{ scaleY: [0.95, 1, 0.95] }}
-                              transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
-                            />
-                          ))}
-                        </motion.div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {/* Actual Video - Autoplays muted on scroll */}
+                <video
+                  ref={videoRef}
+                  className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                  src="/videos/imissive-platform-demo.mp4"
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label="iMissive platform video"
+                />
 
-                {/* Play button */}
-                <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <motion.div
-                    className="relative"
-                    animate={{ scale: [1, 1.03, 1] }}
-                    transition={{ duration: 2.5, repeat: Infinity }}
+                {/* Play button - only visible on hover/focus */}
+                <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300">
+                  <motion.div 
+                    className="relative h-16 w-16 rounded-full bg-secondary/90 flex items-center justify-center shadow-xl backdrop-blur-sm"
+                    whileHover={{ scale: 1.1 }}
                   >
-                    {/* Pulse rings */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-secondary/30"
-                      animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 rounded-full bg-secondary/30"
-                      animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
-                    />
-                    
-                    {/* Play button */}
-                    <motion.div 
-                      className="relative h-20 w-20 rounded-full bg-secondary flex items-center justify-center shadow-2xl shadow-secondary/40 group-hover:shadow-secondary/60 transition-all"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <Play className="h-8 w-8 text-secondary-foreground ml-1" fill="currentColor" />
-                    </motion.div>
+                    <Play className="h-6 w-6 text-secondary-foreground ml-0.5" fill="currentColor" />
                   </motion.div>
                 </div>
 
-                {/* Video duration badge */}
-                <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm text-white/90 text-sm font-medium flex items-center gap-2">
-                  <MonitorPlay className="h-3.5 w-3.5" />
-                  {t?.('duration') || '2:30'}
-                </div>
               </motion.div>
-
-              {/* Caption with placeholder notice */}
-              <div className="text-center mt-4">
-                <p className="text-sm text-primary-foreground/50">
-                  {t?.('caption') || 'Click to watch the platform overview'}
-                </p>
-                <p className="text-[10px] text-primary-foreground/30 mt-1 italic">
-                  Product video placeholder
-                </p>
-              </div>
             </div>
           </FadeUp>
         </div>
@@ -230,42 +204,30 @@ export function VideoSection({ locale }: VideoSectionProps) {
               <X className="h-6 w-6" />
             </Button>
 
-            {/* Video placeholder */}
-            <div className="aspect-video rounded-xl bg-gradient-to-br from-primary via-primary/95 to-[#2a1a35] border border-white/10 flex flex-col items-center justify-center overflow-hidden">
-              {/* Animated background */}
-              <motion.div
-                className="absolute inset-0 opacity-20"
-                animate={{
-                  background: [
-                    'radial-gradient(circle at 30% 30%, rgba(253,191,48,0.3) 0%, transparent 50%)',
-                    'radial-gradient(circle at 70% 70%, rgba(97,197,186,0.3) 0%, transparent 50%)',
-                    'radial-gradient(circle at 30% 30%, rgba(253,191,48,0.3) 0%, transparent 50%)',
-                  ]
-                }}
-                transition={{ duration: 8, repeat: Infinity }}
-              />
-              
-              <div className="relative text-center p-8">
-                <motion.div 
-                  className="h-20 w-20 rounded-full bg-white/10 flex items-center justify-center mb-6 mx-auto"
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <Play className="h-10 w-10 text-white/60" />
-                </motion.div>
-                <h3 id="video-modal-title" className="text-xl font-semibold text-white mb-2">
-                  {t?.('comingSoon') || 'Video Coming Soon'}
-                </h3>
-                <p className="text-white/50 max-w-md mx-auto">
-                  {t?.('comingSoonDesc') || 'Our platform demo video is being prepared. Check back soon for an in-depth look at iMissive.'}
-                </p>
-              </div>
+            {/* Video in modal with controls */}
+            <div className="aspect-video rounded-xl overflow-hidden bg-black">
+              <video
+                ref={modalVideoRef}
+                className="w-full h-full object-contain"
+                src="/videos/imissive-platform-demo.mp4"
+                controls
+                muted
+                autoPlay
+                playsInline
+                preload="metadata"
+                aria-label="iMissive platform video"
+              >
+                <track kind="captions" label="English" />
+              </video>
             </div>
+
+            {/* Modal title for accessibility */}
+            <h3 id="video-modal-title" className="sr-only">
+              iMissive Platform Demo Video
+            </h3>
           </motion.div>
         </motion.div>
       )}
     </>
   )
 }
-
-
