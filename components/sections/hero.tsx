@@ -262,7 +262,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
             >
               {[
                 { icon: Shield, text: 'High Availability' },
-                { icon: FileCheck, text: 'Enterprise SLA' },
+                { icon: FileCheck, text: 'Enterprise SLA Options' },
                 { icon: Activity, text: 'Real-time Reporting' },
                 { icon: Phone, text: 'WhatsApp Business API' },
               ].map((item, i) => (
@@ -318,25 +318,21 @@ export function HeroSection({ locale }: HeroSectionProps) {
                     </div>
                     <div className="grid grid-cols-3 gap-3">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-accent">
-                          <AnimatedCounter value={98} suffix="%" />
-                        </div>
-                        <div className="text-[10px] text-white/60 mt-0.5">Delivered</div>
+                        <div className="text-2xl font-bold text-accent">Live</div>
+                        <div className="text-[10px] text-white/60 mt-0.5">Delivery Visibility</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-secondary">1.4s</div>
-                        <div className="text-[10px] text-white/60 mt-0.5">Avg. Latency</div>
+                        <div className="text-2xl font-bold text-secondary">Low</div>
+                        <div className="text-[10px] text-white/60 mt-0.5">Latency Routing</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-white">
-                          <AnimatedCounter value={2100000} suffix="" />
-                        </div>
-                        <div className="text-[10px] text-white/60 mt-0.5">Today</div>
+                        <div className="text-2xl font-bold text-white">Active</div>
+                        <div className="text-[10px] text-white/60 mt-0.5">Monitoring</div>
                       </div>
                     </div>
-                    {/* Progress bar */}
+                    {/* Progress bar - decorative visualization */}
                     <div className="mt-3">
-                      <AnimatedProgress value={98.7} color="bg-accent" />
+                      <AnimatedProgress value={85} color="bg-accent" />
                     </div>
                   </motion.div>
 
@@ -403,7 +399,7 @@ export function HeroSection({ locale }: HeroSectionProps) {
                       </div>
                       <div className="flex items-center gap-1">
                         <CheckCircle2 className="h-3 w-3 text-accent" />
-                        <span className="text-[10px] text-accent font-medium">Verified • 1.2s</span>
+                        <span className="text-[10px] text-accent font-medium">Verification Flow</span>
                       </div>
                     </motion.div>
 
@@ -487,8 +483,8 @@ export function HeroSection({ locale }: HeroSectionProps) {
                         <Activity className="h-4 w-4 text-accent" />
                       </div>
                       <div>
-                        <div className="text-lg font-bold text-white">98.7%</div>
-                        <div className="text-[9px] text-white/60">Delivery Rate</div>
+                        <div className="text-lg font-bold text-white">High</div>
+                        <div className="text-[9px] text-white/60">Availability</div>
                       </div>
                     </div>
                   </div>

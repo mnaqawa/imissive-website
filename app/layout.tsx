@@ -6,10 +6,14 @@ export const metadata: Metadata = {
   keywords: 'Enterprise SMS provider, SMS API provider, OTP messaging platform, WhatsApp Business API provider, Bulk SMS platform, Sender ID management, SMPP provider, Enterprise messaging infrastructure, CPaaS platform, Customer communication platform, Messaging API, Delivery reporting, Multi-market messaging',
   icons: {
     icon: [
-      { url: '/favicon.jpg', type: 'image/jpeg' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico?v=4' },
+      { url: '/favicon-32x32.png?v=4', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png?v=4', sizes: '16x16', type: 'image/png' },
     ],
-    apple: '/apple-icon.png',
+    apple: [
+      { url: '/apple-touch-icon.png?v=4', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico?v=4',
   },
 }
 

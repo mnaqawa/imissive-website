@@ -295,7 +295,7 @@ export default async function ApiDocsPage({ params }: { params: Promise<{ locale
                       </span>
                     </div>
                     <pre className="overflow-x-auto bg-[#1a1225] p-5 text-sm text-[#e0d4e8] font-mono">
-{`curl -X POST https://api.example.com/v1/sms/send \\
+{`curl -X POST https://api.imissive.com/v1/sms/send \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -307,8 +307,8 @@ export default async function ApiDocsPage({ params }: { params: Promise<{ locale
                   </div>
                   <p className="mt-4 text-xs text-muted-foreground">
                     {isArabic 
-                      ? '* استبدل YOUR_API_KEY بمفتاح API الفعلي. عنوان URL الإنتاج يُقدم بعد التعاقد الفني.'
-                      : '* Replace YOUR_API_KEY with your actual API key. Production URL provided after onboarding.'}
+                      ? '* استبدل YOUR_API_KEY بمفتاح API الفعلي. نقاط النهاية وبيانات الاعتماد للإنتاج تُقدم بعد التعاقد وتفعيل الحساب.'
+                      : '* Replace YOUR_API_KEY with your actual API key. Production endpoints and credentials are provided after onboarding and account activation.'}
                   </p>
                 </CardContent>
               </Card>
@@ -1087,7 +1087,7 @@ X-RateLimit-Reset: <reset_timestamp>`}
                         <span className="text-xs font-medium text-white/50">bash</span>
                       </div>
                       <pre className="overflow-x-auto bg-[#1a1225] p-5 text-sm text-[#e0d4e8] font-mono">
-{`curl -X POST https://api.example.com/v1/sms/send \\
+{`curl -X POST https://api.imissive.com/v1/sms/send \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -1121,7 +1121,7 @@ X-RateLimit-Reset: <reset_timestamp>`}
                         <span className="text-xs font-medium text-white/50">javascript</span>
                       </div>
                       <pre className="overflow-x-auto bg-[#1a1225] p-5 text-sm text-[#e0d4e8] font-mono">
-{`const response = await fetch('https://api.example.com/v1/sms/send', {
+{`const response = await fetch('https://api.imissive.com/v1/sms/send', {
   method: 'POST',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY',
@@ -1165,7 +1165,7 @@ console.log(data);`}
 {`import requests
 
 response = requests.post(
-    'https://api.example.com/v1/sms/send',
+    'https://api.imissive.com/v1/sms/send',
     headers={
         'Authorization': 'Bearer YOUR_API_KEY',
         'Content-Type': 'application/json'
@@ -1205,7 +1205,7 @@ print(response.json())`}
                       </div>
                       <pre className="overflow-x-auto bg-[#1a1225] p-5 text-sm text-[#e0d4e8] font-mono">
 {`<?php
-$ch = curl_init('https://api.example.com/v1/sms/send');
+$ch = curl_init('https://api.imissive.com/v1/sms/send');
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => true,

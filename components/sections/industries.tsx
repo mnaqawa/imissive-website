@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { Landmark, Building2, ShoppingCart, UtensilsCrossed, Heart, Briefcase, Truck, Plane, ArrowRight, Globe } from 'lucide-react'
+import { Landmark, Building2, ShoppingCart, UtensilsCrossed, Heart, Briefcase, ArrowRight, Globe } from 'lucide-react'
 import { FadeUp, motion, useInView } from '@/components/ui/motion'
 import { useRef } from 'react'
 
@@ -77,26 +77,7 @@ export function IndustriesSection({ locale }: IndustriesSectionProps) {
       bgColor: 'bg-primary/10',
       borderColor: 'border-primary/20',
     },
-    {
-      icon: Truck,
-      title: t('logisticsTitle'),
-      description: t('logisticsDesc'),
-      useCases: t('logisticsUseCases'),
-      href: `/${locale}/solutions/logistics`,
-      color: 'text-accent',
-      bgColor: 'bg-accent/10',
-      borderColor: 'border-accent/20',
-    },
-    {
-      icon: Plane,
-      title: t('travelTitle'),
-      description: t('travelDesc'),
-      useCases: t('travelUseCases'),
-      href: `/${locale}/solutions/travel`,
-      color: 'text-secondary',
-      bgColor: 'bg-secondary/10',
-      borderColor: 'border-secondary/20',
-    },
+    
   ]
 
   return (

@@ -154,7 +154,7 @@ export default async function WhatsAppPage({ params }: { params: Promise<{ local
     subtitle: 'Connect with your customers on the most-used messaging channel globally',
     description: 'WhatsApp Business API integration enabling your enterprise to engage customers on the most popular messaging platform. Pre-approved message templates, rich media messaging, and seamless integration.',
     features: [
-      { iconName: 'CheckCheck' as IconName, title: 'Verified Account', description: 'Green verification badge to build customer trust' },
+      { iconName: 'CheckCheck' as IconName, title: 'Business Profile Support', description: 'Business profile features where applicable' },
       { iconName: 'FileText' as IconName, title: 'Message Templates', description: 'Pre-approved message templates for notifications' },
       { iconName: 'Image' as IconName, title: 'Rich Media', description: 'Send images, documents, and video' },
       { iconName: 'MessageCircle' as IconName, title: 'Two-Way Conversations', description: 'Support interactive customer conversations' },
@@ -162,7 +162,7 @@ export default async function WhatsAppPage({ params }: { params: Promise<{ local
       { iconName: 'BarChart3' as IconName, title: 'Advanced Analytics', description: 'Track engagement and performance in detail' },
     ],
     benefits: [
-      'Official Meta API',
+      'WhatsApp Business API Integration',
       'High-engagement customer communication channel',
       'Full Arabic language support',
       'End-to-end encryption',

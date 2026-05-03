@@ -149,11 +149,11 @@ export default async function OTPPage({ params }: { params: Promise<{ locale: st
     subtitle: 'Secure identity verification via SMS and WhatsApp',
     description: 'Reliable OTP service to secure your applications and platforms. Fast generation and delivery designed to support smoother verification experiences. Easy API integration with full Arabic support.',
     features: [
-      { iconName: 'Zap' as IconName, title: 'Low-Latency Delivery', description: 'Fast OTP delivery via SMS or WhatsApp' },
+      { iconName: 'Zap' as IconName, title: 'Low-Latency Delivery', description: 'Low-latency OTP delivery via SMS or WhatsApp' },
       { iconName: 'Shield' as IconName, title: 'Advanced Security', description: 'Random code generation with configurable expiry' },
       { iconName: 'RefreshCcw' as IconName, title: 'Auto-Retry', description: 'Retry logic for improved delivery handling' },
       { iconName: 'Globe' as IconName, title: 'Multiple Channels', description: 'SMS, WhatsApp, and voice' },
-      { iconName: 'Lock' as IconName, title: 'Strong Encryption', description: 'Code encryption in transit and at rest' },
+      { iconName: 'Lock' as IconName, title: 'Security-Focused Implementation', description: 'Security controls based on implementation requirements' },
       { iconName: 'BarChart3' as IconName, title: 'Security Analytics', description: 'Monitor verification rates and failed attempts' },
     ],
     benefits: [

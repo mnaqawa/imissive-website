@@ -159,10 +159,10 @@ export default async function SMSPage({ params }: { params: Promise<{ locale: st
     subtitle: 'Reliable enterprise messaging infrastructure for high-volume organizations',
     description: 'Scalable SMS solutions designed for enterprises. Sender ID governance, delivery visibility, and multi-language support built-in.',
     features: [
-      { iconName: 'Shield' as IconName, title: 'Sender ID Governance', description: 'CITC-compliant Sender ID registration and management' },
+      { iconName: 'Shield' as IconName, title: 'Sender ID Governance', description: 'CST/CITC-aligned Sender ID registration support' },
       { iconName: 'BarChart3' as IconName, title: 'Delivery Visibility', description: 'Detailed delivery reports and real-time status tracking' },
       { iconName: 'Globe' as IconName, title: 'Arabic Support', description: 'Full support for Arabic messages and diacritics' },
-      { iconName: 'Zap' as IconName, title: 'High-Speed Delivery', description: 'Scalable infrastructure for large campaigns' },
+      { iconName: 'Zap' as IconName, title: 'Scalable Message Delivery', description: 'Scalable infrastructure for large campaigns' },
       { iconName: 'Users' as IconName, title: 'Contact Management', description: 'Advanced list management and segmentation tools' },
       { iconName: 'Clock' as IconName, title: 'Smart Scheduling', description: 'Schedule messages for optimal delivery times' },
     ],
@@ -171,7 +171,7 @@ export default async function SMSPage({ params }: { params: Promise<{ locale: st
       'RESTful API for seamless integration',
       'Real-time delivery reporting',
       'Enterprise support and operational assistance',
-      'CITC regulatory compliance',
+      'CST/CITC regulatory alignment',
       'Competitive enterprise pricing',
     ],
     useCases: [

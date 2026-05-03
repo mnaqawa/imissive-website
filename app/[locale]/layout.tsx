@@ -15,6 +15,8 @@ import {
 } from '@/lib/seo-config'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { CookieConsentProvider } from '@/lib/cookie-consent'
+import { CookieConsent } from '@/components/cookie-consent'
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -75,20 +77,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     icons: {
       icon: [
-        {
-          url: '/icon-light-32x32.png',
-          media: '(prefers-color-scheme: light)',
-        },
-        {
-          url: '/icon-dark-32x32.png',
-          media: '(prefers-color-scheme: dark)',
-        },
-        {
-          url: '/icon.svg',
-          type: 'image/svg+xml',
-        },
+        { url: '/favicon.ico?v=4' },
+        { url: '/favicon-32x32.png?v=4', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon-16x16.png?v=4', sizes: '16x16', type: 'image/png' },
       ],
-      apple: '/apple-icon.png',
+      apple: [
+        { url: '/apple-touch-icon.png?v=4', sizes: '180x180', type: 'image/png' },
+      ],
+      shortcut: '/favicon.ico?v=4',
     },
     verification: {
       // Add verification codes when available
@@ -143,13 +139,16 @@ export default async function LocaleLayout({
         />
       </head>
       <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
-        <NextIntlClientProvider messages={messages}>
-          <Header locale={locale} />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer locale={locale} />
-        </NextIntlClientProvider>
+        <CookieConsentProvider>
+          <NextIntlClientProvider messages={messages}>
+            <Header locale={locale} />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer locale={locale} />
+            <CookieConsent locale={locale} />
+          </NextIntlClientProvider>
+        </CookieConsentProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

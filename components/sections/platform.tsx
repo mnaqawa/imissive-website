@@ -156,9 +156,9 @@ export function PlatformSection({ locale }: PlatformSectionProps) {
             <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-12">
               {[
                 { label: 'API Availability', value: 'High', color: 'text-accent' },
-                { label: 'Avg Response', value: '45ms', color: 'text-secondary' },
-                { label: 'Daily Messages', value: '2M+', color: 'text-primary' },
-                { label: 'Active Routes', value: '150+', color: 'text-accent-orange' },
+                { label: 'API Responsiveness', value: 'Fast', color: 'text-secondary' },
+                { label: 'Message Throughput', value: 'Scalable', color: 'text-primary' },
+                { label: 'Routing Coverage', value: 'Broad', color: 'text-accent-orange' },
               ].map((stat, i) => (
                 <motion.div 
                   key={i}

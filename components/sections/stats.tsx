@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { platformMetrics } from '@/lib/content-config'
-import { FadeUp, AnimatedCounter, StaggerContainer, StaggerItem } from '@/components/ui/motion'
+import { StaggerContainer, StaggerItem } from '@/components/ui/motion'
 
 interface StatsSectionProps {
   locale: string
@@ -10,21 +10,17 @@ interface StatsSectionProps {
 
 /**
  * Platform Metrics Section
- * 
- * IMPORTANT: Verify and approve these metrics before production.
- * Metrics are loaded from /lib/content-config.ts for easy updates.
- * Update the platformMetrics object in content-config.ts to change values.
+ * Shows descriptive labels only - no numeric claims.
  */
 export function StatsSection({ locale }: StatsSectionProps) {
   const t = useTranslations('stats')
 
-  // Metrics loaded from content-config.ts
-  // Verify these values before production deployment
+  // Labels only - no numeric values
   const stats = [
-    { value: platformMetrics.messagesDelivered, label: t('messages') },
-    { value: platformMetrics.enterpriseClients, label: t('clients') },
-    { value: platformMetrics.platformUptime, label: t('uptime') },
-    { value: platformMetrics.supportResponse, label: t('support') },
+    { label: platformMetrics.messagesDelivered },
+    { label: platformMetrics.enterpriseClients },
+    { label: platformMetrics.platformUptime },
+    { label: platformMetrics.supportResponse },
   ]
 
   return (
@@ -34,10 +30,7 @@ export function StatsSection({ locale }: StatsSectionProps) {
           {stats.map((stat, index) => (
             <StaggerItem key={index}>
               <div className="text-center">
-                <div className="text-3xl font-bold text-secondary lg:text-4xl">
-                  <AnimatedCounter value={stat.value} duration={2} />
-                </div>
-                <div className="mt-1.5 text-xs text-primary-foreground/70 lg:text-sm">
+                <div className="text-lg font-semibold text-secondary lg:text-xl">
                   {stat.label}
                 </div>
               </div>

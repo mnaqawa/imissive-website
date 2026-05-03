@@ -180,7 +180,7 @@ export function Header({ locale }: HeaderProps) {
         <Link href={`/${locale}`} className="flex items-center group shrink-0">
           <Image
             src="/images/imissive-logo.png"
-            alt="iMissive"
+            alt="iMissive - Enterprise Messaging Platform"
             width={160}
             height={40}
             className={cn(

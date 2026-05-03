@@ -3,9 +3,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { MessageSquare, Phone, Shield, Bot, Code2, Landmark, Building2, ShoppingCart, UtensilsCrossed, Heart, Briefcase, Mail, ExternalLink, MapPin } from 'lucide-react'
+import { MessageSquare, Phone, Shield, Bot, Code2, Landmark, Building2, ShoppingCart, UtensilsCrossed, Heart, Briefcase, Mail, ExternalLink, MapPin, Cookie } from 'lucide-react'
 import { externalLinks } from '@/lib/content-config'
 import { motion } from '@/components/ui/motion'
+import { useCookieConsent } from '@/lib/cookie-consent'
 
 interface FooterProps {
   locale: string
@@ -17,6 +18,7 @@ const CURRENT_YEAR = 2026
 export function Footer({ locale }: FooterProps) {
   const t = useTranslations('footer')
   const nav = useTranslations('nav')
+  const { openPreferences } = useCookieConsent()
 
   // Platform links point to Why Us page anchor sections
   const platformLinks = [
@@ -80,7 +82,7 @@ export function Footer({ locale }: FooterProps) {
             <Link href={`/${locale}`} className="inline-block group">
               <Image
                 src="/images/imissive-logo.png"
-                alt="iMissive - Interactive Missive"
+                alt="iMissive - Enterprise Messaging Platform Saudi Arabia"
                 width={160}
                 height={42}
                 className="h-9 w-auto brightness-0 invert transition-opacity group-hover:opacity-80"
@@ -252,6 +254,12 @@ export function Footer({ locale }: FooterProps) {
                 {link.label}
               </Link>
             ))}
+            <button
+              onClick={openPreferences}
+              className="text-[11px] text-white/45 hover:text-[#FDBF30] transition-colors leading-relaxed"
+            >
+              Cookie Preferences
+            </button>
             <a
               href={externalLinks.loginPortal}
               target="_blank"

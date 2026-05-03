@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { ArrowRight, Zap, TrendingUp, HeadphonesIcon, ShieldCheck, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { FadeUp, ScaleUp, motion, AnimatedCounter } from '@/components/ui/motion'
+import { FadeUp, ScaleUp, motion } from '@/components/ui/motion'
 
 interface CaseStudySectionProps {
   locale: string
@@ -13,25 +13,19 @@ interface CaseStudySectionProps {
 /**
  * Case Study Section
  * 
- * IMPORTANT - PRODUCTION SAFETY:
- * Case study metrics are placeholders and must be verified before production.
- * 
- * - Metrics shown are example placeholders (3x, 99.2%, 40%, 100%)
- * - Verify and replace with actual verified case study data before production
- * - Do not publish as real results without explicit approval
- * - Move case study content to content-config.ts for easy updates
+ * NOTE: Metrics shown are non-numeric example labels for content safety.
+ * No specific numbers are claimed without verification.
  */
 export function CaseStudySection({ locale }: CaseStudySectionProps) {
   const t = useTranslations('caseStudy')
   const isRTL = locale === 'ar'
 
-  // PLACEHOLDER METRICS - Verify before production
-  // These values (3x, 99.2%, 40%, 100%) are examples only
+  // Non-numeric example labels for content safety
   const metrics = [
-    { icon: Zap, value: '3x', label: t('metric1'), isPlaceholder: true },
-    { icon: TrendingUp, value: '99.2%', label: t('metric2'), isPlaceholder: true },
-    { icon: HeadphonesIcon, value: '40%', label: t('metric3'), isPlaceholder: true },
-    { icon: ShieldCheck, value: '100%', label: t('metric4'), isPlaceholder: true },
+    { icon: Zap, label: t('metric1'), isPlaceholder: true },
+    { icon: TrendingUp, label: t('metric2'), isPlaceholder: true },
+    { icon: HeadphonesIcon, label: t('metric3'), isPlaceholder: true },
+    { icon: ShieldCheck, label: t('metric4'), isPlaceholder: true },
   ]
 
   return (
@@ -140,10 +134,7 @@ export function CaseStudySection({ locale }: CaseStudySectionProps) {
                           <metric.icon className="h-5 w-5 text-secondary" />
                         </motion.div>
                       </div>
-                      <div className="text-2xl font-bold text-secondary mb-1">
-                        <AnimatedCounter value={metric.value} duration={2} />
-                      </div>
-                      <div className="text-xs text-primary-foreground/80 leading-tight">
+                      <div className="text-sm font-semibold text-secondary leading-tight text-center">
                         {metric.label}
                       </div>
                     </motion.div>

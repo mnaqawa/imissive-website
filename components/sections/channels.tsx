@@ -54,7 +54,7 @@ export function ChannelsSection({ locale }: ChannelsSectionProps) {
       iconColor: 'text-accent',
       borderColor: 'border-accent/20',
       glowColor: 'shadow-accent/20',
-      badge: 'Official API',
+      badge: 'Business API',
     },
     {
       icon: Bot,

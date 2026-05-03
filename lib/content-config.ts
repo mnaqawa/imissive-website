@@ -15,11 +15,11 @@
 // These values are displayed publicly in the stats section.
 // =============================================================================
 export const platformMetrics = {
-  // Verify these values before production
-  messagesDelivered: '500M+',    // Total messages delivered
-  enterpriseClients: '200+',     // Number of enterprise clients
-  platformUptime: 'High Availability',  // Platform availability (verify specific SLA before using percentage)
-  supportResponse: '<2hr',       // Average support response time
+  // Non-numeric labels for content safety
+  messagesDelivered: 'Messages Delivered',
+  enterpriseClients: 'Enterprise Clients',
+  platformUptime: 'Platform Availability',
+  supportResponse: 'Support Response',
 }
 
 // =============================================================================
@@ -90,7 +90,7 @@ export const externalLinks = {
 export const trustBadges = {
   uptime: 'High Availability',
   hasEnterpriseSLA: true,
-  isWhatsAppPartner: true,
+  isWhatsAppBusinessAPIProvider: true,
   hasCSTCompliance: true,
   hasSenderIdGovernance: true,
   hasDeliveryVisibility: true,
