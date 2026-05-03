@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     description: 'iMissive provides enterprise messaging infrastructure in Saudi Arabia for SMS, OTP, WhatsApp Business, APIs, SMPP, sender governance, routing, and delivery reporting.',
     images: [
       {
-        url: `${SITE_URL}/og-image.png?v=2`,
+        url: `${SITE_URL}/og-image.jpg?v=3`,
         width: 1200,
         height: 630,
-        alt: 'iMissive Enterprise Messaging Platform',
+        alt: 'iMissive - Enterprise Messaging Infrastructure - SMS, OTP, WhatsApp Business, APIs',
       },
     ],
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Enterprise Messaging Platform | SMS Gateway Saudi Arabia | iMissive',
     description: 'iMissive provides enterprise messaging infrastructure in Saudi Arabia for SMS, OTP, WhatsApp Business, APIs, SMPP, sender governance, routing, and delivery reporting.',
-    images: [`${SITE_URL}/og-image.png?v=2`],
+    images: [`${SITE_URL}/og-image.jpg?v=3`],
   },
   icons: {
     icon: [

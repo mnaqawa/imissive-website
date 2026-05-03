@@ -57,10 +57,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         : meta.description,
       images: [
         {
-          url: `${SITE_URL}/og-image.png?v=2`,
+          url: `${SITE_URL}/og-image.jpg?v=3`,
           width: 1200,
           height: 630,
-          alt: 'iMissive Enterprise Messaging Platform',
+          alt: 'iMissive - Enterprise Messaging Infrastructure - SMS, OTP, WhatsApp Business, APIs',
         },
       ],
       ...(ENGLISH_ONLY_LAUNCH ? {} : { alternateLocale: isArabic ? 'en_US' : 'ar_SA' }),
@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: isArabic 
         ? 'بنية تحتية موثوقة للرسائل المؤسسية للرسائل النصية وواتساب للأعمال والتحقق من الهوية وحلول الروبوتات الذكية.'
         : meta.description,
-      images: [`${SITE_URL}/og-image.png?v=2`],
+      images: [`${SITE_URL}/og-image.jpg?v=3`],
     },
     robots: {
       index: true,
