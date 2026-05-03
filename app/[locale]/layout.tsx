@@ -55,6 +55,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: isArabic 
         ? 'بنية تحتية موثوقة للرسائل المؤسسية للرسائل النصية وواتساب للأعمال والتحقق من الهوية وحلول الروبوتات الذكية.'
         : meta.description,
+      images: [
+        {
+          url: `${SITE_URL}/og-image.png?v=2`,
+          width: 1200,
+          height: 630,
+          alt: 'iMissive Enterprise Messaging Platform',
+        },
+      ],
       ...(ENGLISH_ONLY_LAUNCH ? {} : { alternateLocale: isArabic ? 'en_US' : 'ar_SA' }),
     },
     twitter: {
@@ -63,6 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: isArabic 
         ? 'بنية تحتية موثوقة للرسائل المؤسسية للرسائل النصية وواتساب للأعمال والتحقق من الهوية وحلول الروبوتات الذكية.'
         : meta.description,
+      images: [`${SITE_URL}/og-image.png?v=2`],
     },
     robots: {
       index: true,
